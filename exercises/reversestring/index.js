@@ -7,13 +7,11 @@
 //   reverse('Greetings!') === '!sgniteerG'
 
 function reverse(str) {
-  // strを1文字ずつ取得する→
-  let strLength = str.length;
-  let result = [];
-  for (let i = strLength; i >= 0; i--) {
-    result = [...result, str.substr(i, 1)];
+  let reversed = '';
+  for (let char of str) {
+    reversed =  char + reversed;
   }
-  return result.join('');
+  return reversed;
 }
 
 module.exports = reverse;
