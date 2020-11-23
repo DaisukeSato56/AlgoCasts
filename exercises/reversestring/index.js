@@ -6,6 +6,14 @@
 //   reverse('hello') === 'olleh'
 //   reverse('Greetings!') === '!sgniteerG'
 
-function reverse(str) {}
+function reverse(str) {
+  // strを1文字ずつ取得する→
+  let strLength = str.length;
+  let result = [];
+  for (let i = strLength; i >= 0; i--) {
+    result = [...result, str.substr(i, 1)];
+  }
+  return result.join('');
+}
 
 module.exports = reverse;
