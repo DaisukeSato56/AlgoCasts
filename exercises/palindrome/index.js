@@ -10,7 +10,9 @@
 const reversed = require('../reversestring/index')
 
 function palindrome(str) {
-  return reversed(str) === str;
+  return str.split('').every((char, i) => {
+    return char == str[str.length-i-1];
+  })
 }
 
 module.exports = palindrome;
