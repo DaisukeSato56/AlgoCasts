@@ -8,6 +8,22 @@
 //   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
 //   anagrams('Hi there', 'Bye there') --> False
 
-function anagrams(stringA, stringB) {}
+function anagrams(stringA, stringB) {
+  const charsA = {};
+  const charsB = {};
+  for (let char of stringA) {
+    if (char == ' ' || char == '!') {
+      continue
+    }
+    charsA[char] = charsA[char] + 1 || 1;
+  }
+  for (let char of stringB) {
+    if (char == ' ' || char == '!') {
+      continue
+    }
+    charsB[char] = charsB[char] + 1 || 1;
+  }
+  return JSON.stringify(Object.entries(charsA).sort()) === JSON.stringify(Object.entries(charsB).sort())
+}
 
 module.exports = anagrams;
