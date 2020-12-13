@@ -8,22 +8,50 @@
 //   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
 //   anagrams('Hi there', 'Bye there') --> False
 
+
+// ## original
+// function anagrams(stringA, stringB) {
+//   const charsA = {};
+//   const charsB = {};
+//   for (let char of stringA) {
+//     if (char == ' ' || char == '!') {
+//       continue
+//     }
+//     charsA[char] = charsA[char] + 1 || 1;
+//   }
+//   for (let char of stringB) {
+//     if (char == ' ' || char == '!') {
+//       continue
+//     }
+//     charsB[char] = charsB[char] + 1 || 1;
+//   }
+//   return JSON.stringify(Object.entries(charsA).sort()) === JSON.stringify(Object.entries(charsB).sort())
+// }
+
+// ## solution1
 function anagrams(stringA, stringB) {
-  const charsA = {};
-  const charsB = {};
-  for (let char of stringA) {
-    if (char == ' ' || char == '!') {
-      continue
-    }
-    charsA[char] = charsA[char] + 1 || 1;
+  const aCharMap = buildCharMap(stringA);
+  const bCharMap = buildCharMap(stringB);
+  if (Object.keys(aCharMap).length !== Object.keys(bCharMap).length) {
+    return false;
   }
-  for (let char of stringB) {
-    if (char == ' ' || char == '!') {
-      continue
+
+  for (let char in aCharMap) {
+    if (aCharMap[char] !== bCharMap[char]) {
+      return false;
     }
-    charsB[char] = charsB[char] + 1 || 1;
   }
-  return JSON.stringify(Object.entries(charsA).sort()) === JSON.stringify(Object.entries(charsB).sort())
+
+  return true;
+}
+
+function buildCharMap(str) {
+  const charMap = {};
+  for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
+    charMap[char] = charMap[char] + 1 || 1;
+  }
+
+  return charMap;
 }
 
 module.exports = anagrams;
